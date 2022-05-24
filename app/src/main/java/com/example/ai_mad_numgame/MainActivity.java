@@ -72,12 +72,55 @@ public class MainActivity extends AppCompatActivity {
     public void newMatch() {  //A game is composed of three matches
 
         int operand1 = random.nextInt(10);
-        int operand2=0;
+        int operand2= random.nextInt(10);
+        correctButton = random.nextInt(4);
+
+        int correctanswer = -100;
+
         //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
         String operator = operators[random.nextInt(4)];
         textView2.setText(operand1 + operator + operand2);
 
-      // Your code here, to diplay correct and incorrect options on the buttons
+        // Your code here, to diplay correct and incorrect options on the buttons
+        //conditionals
+
+        if (operator.equals("+"))
+            correctanswer=operand1+operand2;
+
+        else if (operator.equals("-"))
+            correctanswer=operand1-operand2;
+
+        else if (operator.equals("/"))
+            correctanswer = operand1/operand2;
+
+        else
+            correctanswer=operand1*operand2;
+
+
+        if(correctButton==0){
+            button1.setText(correctanswer+"");
+            button2.setText(correctanswer+1+"");
+            button3.setText(correctanswer-4+"");
+            button4.setText(correctanswer+9+"");
+        }
+        else if(correctButton==1){
+            button2.setText(correctanswer+"");
+            button1.setText(correctanswer-5+"");
+            button3.setText(correctanswer+4+"");
+            button4.setText(correctanswer*2+"");
+        }
+        else if(correctButton==2){
+            button3.setText(correctanswer+"");
+            button2.setText(correctanswer-6+"");
+            button1.setText(correctanswer+5+"");
+            button4.setText(correctanswer+2+"");
+        }
+        else{
+            button4.setText(correctanswer+"");
+            button3.setText(correctanswer*3+"");
+            button2.setText(correctanswer+3+"");
+            button1.setText(correctanswer-2+"");
+        }
 
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
@@ -88,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             }
             performance[5]=sumOfScore(); //calculating the sum of last three matches (note result of a match is 1 ro 0, and add to performance
             sharedPreferences.edit().putString("data",new Gson().toJson(performance)).apply();
-
         }
     }
 
