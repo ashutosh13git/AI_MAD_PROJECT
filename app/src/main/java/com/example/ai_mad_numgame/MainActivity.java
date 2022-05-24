@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;  //make changes at appropriate places to include this dependency
 
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             button2.setText(correctanswer+"");
             button1.setText(correctanswer-5+"");
             button3.setText(correctanswer+4+"");
-            button4.setText(correctanswer*2+"");
+            button4.setText(correctanswer-2+"");
         }
         else if(correctButton==2){
             button3.setText(correctanswer+"");
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             button4.setText(correctanswer+"");
-            button3.setText(correctanswer*3+"");
+            button3.setText(correctanswer+6+"");
             button2.setText(correctanswer+3+"");
             button1.setText(correctanswer-2+"");
         }
@@ -137,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
     public int sumOfScore(){
         //Computing the sum of score array, which has the 1 or in each index,depending on correct or incorrect answers
         int sum=0;
-       // your code here
+        for (int i=0;i< score.length;i++){
+            sum = sum + score[i];
+        }
         return sum;
     }
 
@@ -156,7 +159,18 @@ public class MainActivity extends AppCompatActivity {
 
     public String getInterpretation(int [][]dataFrame,double slope){
        //provide interpretation based on your slope analysis
-        // Your code here
-        return "Your Interpretation";
+        slope = LR.getSlope(dataFrame);
+        if(slope==0){
+            return "Improve Your Performance";
+        }
+        else if(slope==3.0){
+            return "Maximum Performance";
+        }
+        else if(slope>0.0 && slope<3.0 ){
+            return "Constant Growth";
+        }
+        else{
+            return "Decline In Performance";
+        }
     }
 }
